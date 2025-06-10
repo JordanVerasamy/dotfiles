@@ -91,6 +91,13 @@ alias dsra="dev style ruby -A"
 alias quit="exit"
 alias spinlogs="journalctl -fu"
 alias gpmar="git checkout main; git pull; git checkout -; git rebase main"
+alias bdmfk="git cherry-pick 36351d1c49e7e1f24c8f4b514cebc90f115513fd"
+
+ripit() {
+  dev test --coverage-html $@ && dev open test:coverage
+}
+
+
 # This will set your window title
 export PROMPT_COMMAND='echo -ne "\033]0;${PWD##*/}\007"'
 # source ~/.iterm2_shell_integration.basename $SHELL
@@ -107,7 +114,7 @@ export PATH="/usr/local/bin:$PATH"
 export NIX_PATH="nixpkgs=${HOME}/.nix-defexpr/channels/nixpkgs:${HOME}/.nix-defexpr/channels"
 if [ -e ~/.nix-profile/etc/profile.d/nix.sh ]; then . ~/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installersource ~/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
-[[ -f /opt/dev/sh/chruby/chruby.sh ]] && type chruby >/dev/null 2>&1 || chruby () { source /opt/dev/sh/chruby/chruby.sh; chruby "$@"; }
+[[ -f /opt/dev/sh/chruby/chruby.sh ]] && { type chruby >/dev/null 2>&1 || chruby () { source /opt/dev/sh/chruby/chruby.sh; chruby "$@"; } }
 
 [[ -x /opt/homebrew/bin/brew ]] && eval $(/opt/homebrew/bin/brew shellenv)
 
